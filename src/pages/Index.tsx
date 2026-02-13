@@ -1,6 +1,14 @@
 import FloatingHearts from "@/components/FloatingHearts";
 import ValentineQuestion from "@/components/ValentineQuestion";
-import coupleHero from "@/assets/couple-hero.jpg";
+import photo1 from "@/assets/photo-1.jpeg";
+import photo2 from "@/assets/photo-2.jpeg";
+import photo3 from "@/assets/photo-3.jpeg";
+import photo4 from "@/assets/photo-4.jpeg";
+import photo5 from "@/assets/photo-5.jpeg";
+import photo6 from "@/assets/photo-6.jpeg";
+import photo7 from "@/assets/photo-7.jpeg";
+
+const photos = [photo1, photo2, photo3, photo4, photo5, photo6, photo7];
 
 const Index = () => {
   return (
@@ -15,7 +23,7 @@ const Index = () => {
         <div className="mb-8 animate-float-heart">
           <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-primary shadow-romantic mx-auto">
             <img
-              src={coupleHero}
+              src={photo1}
               alt="Our love"
               className="w-full h-full object-cover"
             />
@@ -34,14 +42,20 @@ const Index = () => {
           You make my world brighter, warmer, and so much more beautiful.
         </p>
 
-        {/* Photo placeholders for your pictures */}
-        <div className="flex gap-6 mb-12 flex-wrap justify-center">
-          <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl border-2 border-primary/30 bg-card flex items-center justify-center text-muted-foreground text-xs text-center p-2 shadow-romantic/30">
-            📸<br/>Your photo here
-          </div>
-          <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl border-2 border-primary/30 bg-card flex items-center justify-center text-muted-foreground text-xs text-center p-2 shadow-romantic/30">
-            📸<br/>Her photo here
-          </div>
+        {/* Photo Gallery */}
+        <div className="flex gap-4 mb-12 flex-wrap justify-center max-w-3xl">
+          {photos.slice(1).map((photo, i) => (
+            <div
+              key={i}
+              className="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-romantic/30 hover:scale-105 transition-transform duration-300"
+            >
+              <img
+                src={photo}
+                alt={`Our memory ${i + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
         </div>
 
         {/* The Question */}
