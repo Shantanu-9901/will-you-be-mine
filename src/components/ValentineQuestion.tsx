@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import Fireworks from "./Fireworks";
-import photo3 from "@/assets/photo-3.jpeg";
+import bgPhoto from "@/assets/photo-7.jpeg";
 
 const ValentineQuestion = () => {
   const [accepted, setAccepted] = useState(false);
@@ -21,9 +21,9 @@ const ValentineQuestion = () => {
         {/* Background photo with fade */}
         <div className="fixed inset-0 z-40 animate-fade-in-slow">
           <img
-            src={photo3}
+            src={bgPhoto}
             alt="Our moment"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
         </div>
