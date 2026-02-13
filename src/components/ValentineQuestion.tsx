@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import Fireworks from "./Fireworks";
+import photo3 from "@/assets/photo-3.jpeg";
 
 const ValentineQuestion = () => {
   const [accepted, setAccepted] = useState(false);
@@ -17,16 +18,26 @@ const ValentineQuestion = () => {
   if (accepted) {
     return (
       <>
+        {/* Background photo with fade */}
+        <div className="fixed inset-0 z-40 animate-fade-in-slow">
+          <img
+            src={photo3}
+            alt="Our moment"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
+        </div>
+
         <Fireworks />
         <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
-          <div className="text-center animate-bounce pointer-events-none">
-            <p className="font-display text-5xl md:text-7xl text-gold mb-4 drop-shadow-lg">
+          <div className="text-center animate-scale-up pointer-events-none">
+            <p className="font-display text-5xl md:text-8xl text-gold mb-6 drop-shadow-[0_0_30px_rgba(255,215,0,0.5)]">
               That's Great! 🎉
             </p>
-            <p className="font-heading text-3xl md:text-5xl text-foreground italic">
+            <p className="font-heading text-3xl md:text-5xl text-foreground italic drop-shadow-lg">
               About to be <span className="text-primary font-bold">Mrs. Patil</span> 💍
             </p>
-            <div className="mt-6 text-6xl animate-pulse">❤️</div>
+            <div className="mt-8 text-7xl animate-pulse">❤️</div>
           </div>
         </div>
       </>
