@@ -51,11 +51,35 @@ const ValentineQuestion = () => {
           One lovely meeting, a lifetime of possibilities…
         </p>
 
-        <img
-          src={bgPhoto}
-          alt="A photo of us together"
-          className="mx-auto mb-8 h-56 w-44 rounded-2xl border-2 border-primary/30 object-cover shadow-romantic sm:h-64 sm:w-48"
-        />
+        <div className="my-6 -mx-6 sm:-mx-10" aria-hidden="true">
+          <svg
+            viewBox="0 0 640 150"
+            className="mx-auto block h-auto w-full overflow-visible"
+            fill="none"
+          >
+            <defs>
+              <linearGradient id="heart-thread" x1="0" y1="0" x2="320" y2="0" gradientUnits="userSpaceOnUse">
+                <stop stopColor="hsl(var(--rose-soft))" stopOpacity=".35" />
+                <stop offset=".5" stopColor="hsl(var(--gold))" />
+                <stop offset="1" stopColor="hsl(var(--rose-soft))" stopOpacity=".35" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M0 76 C72 76 132 76 202 76 M438 76 C508 76 568 76 640 76"
+              stroke="url(#heart-thread)"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+            <path
+              d="M320 132 C290 114 192 87 192 58 C192 32 254 25 320 59 C386 25 448 32 448 58 C448 87 350 114 320 132 Z"
+              stroke="url(#heart-thread)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <circle cx="320" cy="136" r="3.5" fill="hsl(var(--primary))" />
+          </svg>
+        </div>
 
         <h2 className="mb-8 inline-block rounded-xl px-3 py-2 font-display text-4xl text-gold animate-pulse-glow sm:text-5xl md:text-6xl">
           Will You Marry Me? 💕
