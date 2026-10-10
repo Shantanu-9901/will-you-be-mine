@@ -105,9 +105,11 @@ const Index = () => {
                         src={mem.src}
                         poster={mem.poster}
                         aria-label={mem.caption}
-                        controls
+                        autoPlay
+                        loop
+                        muted
                         playsInline
-                        preload="none"
+                        preload="metadata"
                         className="w-full h-full object-cover"
                       />
                     ) : (
