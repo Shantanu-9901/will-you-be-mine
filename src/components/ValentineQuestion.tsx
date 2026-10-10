@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import Fireworks from "./Fireworks";
-import bgPhoto from "@/assets/IMG_1124.jpg";
+import bgPhoto from "@/assets/E60461EA-1513-4C0D-8FE8-379BF97333BB.jpg";
 
 const ValentineQuestion = () => {
   const [accepted, setAccepted] = useState(false);
