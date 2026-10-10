@@ -9,27 +9,27 @@ const memories = [
   { type: "image", src: photo1, caption: "Golden-hour glow ✨" },
   {
     type: "video",
-    src: new URL("../assets/ScreenRecording_10-11-2026 02-35-06_1.mov", import.meta.url).href,
+    src: new URL("../assets/ScreenRecording_10-11-2026 02-35-06_1.mp4", import.meta.url).href,
     poster: photo3,
     caption: "That lovely smile ❤️",
   },
   { type: "image", src: photo2, caption: "A little coconut break 🥥" },
   {
     type: "video",
-    src: new URL("../assets/ScreenRecording_10-11-2026 02-35-22_1.mov", import.meta.url).href,
+    src: new URL("../assets/ScreenRecording_10-11-2026 02-35-22_1.mp4", import.meta.url).href,
     poster: photo1,
     caption: "A little kiss for the camera 😘",
   },
   { type: "image", src: photo3, caption: "Sunshine and you ☀️" },
   {
     type: "video",
-    src: new URL("../assets/ScreenRecording_10-11-2026 02-35-46_1.mov", import.meta.url).href,
+    src: new URL("../assets/ScreenRecording_10-11-2026 02-35-46_1.mp4", import.meta.url).href,
     poster: photo2,
     caption: "Pretty in pink 🌸",
   },
   {
     type: "video",
-    src: new URL("../assets/ScreenRecording_10-11-2026 02-36-11_1.mov", import.meta.url).href,
+    src: new URL("../assets/ScreenRecording_10-11-2026 02-36-11_1.mp4", import.meta.url).href,
     poster: photo3,
     caption: "A playful little moment 💚",
   },
@@ -52,7 +52,34 @@ const Index = () => {
     );
 
     document.querySelectorAll("[data-idx]").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+
+    const videoObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            video.play().catch((error: unknown) => {
+              if (!(error instanceof DOMException && error.name === "NotAllowedError")) {
+                console.error("Gallery video autoplay failed:", error);
+              }
+              video.controls = true;
+            });
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    document.querySelectorAll<HTMLVideoElement>("[data-autoplay-video]").forEach((video) => {
+      videoObserver.observe(video);
+    });
+
+    return () => {
+      observer.disconnect();
+      videoObserver.disconnect();
+    };
   }, []);
 
   return (
@@ -121,14 +148,14 @@ const Index = () => {
                   <div className="overflow-hidden bg-muted/20">
                     {mem.type === "video" ? (
                       <video
+                        data-autoplay-video
                         src={mem.src}
                         poster={mem.poster}
                         aria-label={mem.caption}
-                        autoPlay
                         loop
                         muted
                         playsInline
-                        preload="metadata"
+                        preload="none"
                         className="block h-auto w-full"
                       />
                     ) : (
