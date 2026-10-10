@@ -60,14 +60,14 @@ const Index = () => {
             </div>
 
             <h1 className="font-display text-6xl md:text-9xl text-primary mb-3 drop-shadow-lg">
-              Happy Valentine's Day
+              A New Chapter Begins 💍
             </h1>
             <p className="text-rose-soft font-heading text-xl md:text-3xl italic mb-6">
-              To the love of my life ❤️
+              To my future wife ❤️
             </p>
             <p className="text-muted-foreground text-sm md:text-lg max-w-lg mx-auto leading-relaxed">
-              Every moment with you feels like a dream I never want to wake up from.
-              You make my world brighter, warmer, and so much more beautiful.
+              We’ve shared one lovely meeting, and I’m excited for all the conversations,
+              memories, and moments still ahead of us. I’m so glad our paths crossed.
             </p>
 
             {/* Scroll indicator */}
