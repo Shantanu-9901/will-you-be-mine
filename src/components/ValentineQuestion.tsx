@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import Fireworks from "./Fireworks";
-import bgPhoto from "@/assets/photo-7.jpeg";
+import bgPhoto from "@/assets/IMG_1124.jpg";
 
 const ValentineQuestion = () => {
   const [accepted, setAccepted] = useState(false);
@@ -35,7 +35,7 @@ const ValentineQuestion = () => {
               That's Great! 🎉
             </p>
             <p className="font-heading text-3xl md:text-5xl text-foreground italic drop-shadow-lg">
-              About to be <span className="text-primary font-bold">Mrs. Patil</span> 💍
+              About to be <span className="text-primary font-bold">Future Mrs. Patil</span> 💍
             </p>
             <div className="mt-8 text-7xl animate-pulse">❤️</div>
           </div>
@@ -47,7 +47,7 @@ const ValentineQuestion = () => {
   return (
     <div ref={containerRef} className="relative">
       <h2 className="font-display text-4xl md:text-6xl text-gold mb-10 animate-pulse-glow inline-block px-6 py-2 rounded-xl">
-        Will You Be My Valentine? 💕
+        Will You Marry Me? 💕
       </h2>
 
       <div className="flex gap-8 justify-center mt-8">

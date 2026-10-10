@@ -1,21 +1,18 @@
 import { useState, useEffect } from "react";
 import FloatingHearts from "@/components/FloatingHearts";
 import ValentineQuestion from "@/components/ValentineQuestion";
-import photo1 from "@/assets/photo-1.jpeg";
-import photo2 from "@/assets/photo-2.jpeg";
-import photo3 from "@/assets/photo-3.jpeg";
-import photo4 from "@/assets/photo-4.jpeg";
-import photo5 from "@/assets/photo-5.jpeg";
-import photo6 from "@/assets/photo-6.jpeg";
-import photo7 from "@/assets/photo-7.jpeg";
+import photo1 from "@/assets/IMG_1118.jpg";
+import photo2 from "@/assets/IMG_1119.jpg";
+import photo3 from "@/assets/IMG_1124.jpg";
 
 const memories = [
-  { src: photo2, caption: "Our first selfie 🖤", rotate: "-3deg", size: "large" },
-  { src: photo3, caption: "Rose petals & you 🌹", rotate: "2deg", size: "medium" },
-  { src: photo4, caption: "Adventures together 🌲", rotate: "-1deg", size: "large" },
-  { src: photo5, caption: "Mountain views 🏔️", rotate: "3deg", size: "medium" },
-  { src: photo6, caption: "Your beautiful smile 💕", rotate: "-2deg", size: "medium" },
-  { src: photo7, caption: "Snow day magic ❄️", rotate: "1deg", size: "large" },
+  { type: "image", src: photo1, caption: "A favorite memory 💛", rotate: "-3deg", size: "large" },
+  { type: "image", src: photo2, caption: "A little moment, a lot of love 💕", rotate: "2deg", size: "medium" },
+  { type: "video", src: new URL("../assets/ScreenRecording_10-11-2026 02-35-06_1.mov", import.meta.url).href, poster: photo3, caption: "A moment to replay 🎬", rotate: "-1deg", size: "large" },
+  { type: "image", src: photo3, caption: "Beautiful, always ✨", rotate: "3deg", size: "medium" },
+  { type: "video", src: new URL("../assets/ScreenRecording_10-11-2026 02-35-22_1.mov", import.meta.url).href, poster: photo1, caption: "One of my favorite days 💫", rotate: "-2deg", size: "medium" },
+  { type: "video", src: new URL("../assets/ScreenRecording_10-11-2026 02-35-46_1.mov", import.meta.url).href, poster: photo2, caption: "Us, in motion ❤️", rotate: "1deg", size: "large" },
+  { type: "video", src: new URL("../assets/ScreenRecording_10-11-2026 02-36-11_1.mov", import.meta.url).href, poster: photo3, caption: "A memory worth keeping 🎞️", rotate: "-2deg", size: "medium" },
 ];
 
 const Index = () => {
@@ -103,13 +100,26 @@ const Index = () => {
                   style={{ transform: `rotate(${mem.rotate})` }}
                 >
                   <div className={`overflow-hidden ${mem.size === "large" ? "h-64 md:h-80" : "h-48 md:h-64"}`}>
-                    <img
-                      src={mem.src}
-                      alt={mem.caption}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
+                    {mem.type === "video" ? (
+                      <video
+                        src={mem.src}
+                        poster={mem.poster}
+                        aria-label={mem.caption}
+                        controls
+                        playsInline
+                        preload="none"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <img
+                        src={mem.src}
+                        alt={mem.caption}
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                    )}
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
                   <p className="absolute bottom-4 left-4 right-4 font-heading text-sm md:text-base text-foreground italic">
                     {mem.caption}
                   </p>
