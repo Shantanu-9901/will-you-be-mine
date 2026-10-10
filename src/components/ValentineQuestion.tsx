@@ -81,7 +81,7 @@ const ValentineQuestion = () => {
           </svg>
         </div>
 
-        <h2 className="mb-8 inline-block rounded-xl px-3 py-2 font-display text-4xl text-gold animate-pulse-glow sm:text-5xl md:text-6xl">
+        <h2 className="mb-8 font-display text-4xl text-gold sm:text-5xl md:text-6xl">
           Will You Marry Me? 💕
         </h2>
 
