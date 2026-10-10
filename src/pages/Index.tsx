@@ -63,7 +63,7 @@ const Index = () => {
               A New Chapter Begins 💍
             </h1>
             <p className="text-rose-soft font-heading text-xl md:text-3xl italic mb-6">
-              To my future wife ❤️
+              To the most beautiful woman ❤️
             </p>
             <p className="text-muted-foreground text-sm md:text-lg max-w-lg mx-auto leading-relaxed">
               We’ve shared one lovely meeting, and I’m excited for all the conversations,
