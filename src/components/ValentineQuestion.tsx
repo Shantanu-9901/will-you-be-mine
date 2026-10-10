@@ -1,17 +1,63 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useLayoutEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Fireworks from "./Fireworks";
 import bgPhoto from "@/assets/E60461EA-1513-4C0D-8FE8-379BF97333BB.jpg";
 
 const ValentineQuestion = () => {
   const [accepted, setAccepted] = useState(false);
   const [noPos, setNoPos] = useState<{ top: string; left: string } | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const noButtonRef = useRef<HTMLButtonElement>(null);
+
+  const keepNoButtonInViewport = useCallback(() => {
+    const button = noButtonRef.current;
+    if (!button || !noPos) return;
+
+    const { width, height } = button.getBoundingClientRect();
+    const viewport = window.visualViewport;
+    const margin = 32;
+    const minX = (viewport?.offsetLeft ?? 0) + margin;
+    const minY = (viewport?.offsetTop ?? 0) + margin;
+    const maxX = Math.max(minX, (viewport?.offsetLeft ?? 0) + (viewport?.width ?? window.innerWidth) - width - margin);
+    const maxY = Math.max(minY, (viewport?.offsetTop ?? 0) + (viewport?.height ?? window.innerHeight) - height - margin);
+    const left = Math.min(Math.max(parseFloat(noPos.left), minX), maxX);
+    const top = Math.min(Math.max(parseFloat(noPos.top), minY), maxY);
+
+    if (left !== parseFloat(noPos.left) || top !== parseFloat(noPos.top)) {
+      setNoPos({ left: `${left}px`, top: `${top}px` });
+    }
+  }, [noPos]);
+
+  useLayoutEffect(() => {
+    let frame = 0;
+    const clampButton = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(keepNoButtonInViewport);
+    };
+
+    clampButton();
+    window.addEventListener("resize", clampButton);
+    window.visualViewport?.addEventListener("resize", clampButton);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", clampButton);
+      window.visualViewport?.removeEventListener("resize", clampButton);
+    };
+  }, [keepNoButtonInViewport]);
 
   const moveNoButton = useCallback(() => {
-    const maxX = Math.min(window.innerWidth - 120, window.innerWidth * 0.85);
-    const maxY = Math.min(window.innerHeight - 50, window.innerHeight * 0.85);
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    const button = noButtonRef.current;
+    if (!button) return;
+
+    const { width, height } = button.getBoundingClientRect();
+    const viewport = window.visualViewport;
+    const margin = 32;
+    const minX = (viewport?.offsetLeft ?? 0) + margin;
+    const minY = (viewport?.offsetTop ?? 0) + margin;
+    const maxX = Math.max(minX, (viewport?.offsetLeft ?? 0) + (viewport?.width ?? window.innerWidth) - width - margin);
+    const maxY = Math.max(minY, (viewport?.offsetTop ?? 0) + (viewport?.height ?? window.innerHeight) - height - margin);
+    const x = minX + Math.random() * (maxX - minX);
+    const y = minY + Math.random() * (maxY - minY);
     setNoPos({ top: `${y}px`, left: `${x}px` });
   }, []);
 
@@ -44,8 +90,21 @@ const ValentineQuestion = () => {
     );
   }
 
+  const noButton = (
+    <button
+      ref={noButtonRef}
+      onMouseEnter={moveNoButton}
+      onTouchStart={moveNoButton}
+      onClick={moveNoButton}
+      className="whitespace-nowrap rounded-full bg-secondary px-10 py-4 font-heading text-xl text-secondary-foreground transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      style={noPos ? { position: "fixed", ...noPos, zIndex: 100 } : undefined}
+    >
+      No 😢
+    </button>
+  );
+
   return (
-    <div ref={containerRef} className="relative mx-auto w-full max-w-3xl">
+    <div className="relative mx-auto w-full max-w-3xl">
       <div className="rounded-3xl border border-primary/25 bg-card/70 px-6 py-8 text-center shadow-romantic backdrop-blur-xl sm:px-10 sm:py-10">
         <p className="mb-6 font-heading text-lg italic text-rose-soft sm:text-xl">
           One lovely meeting, a lifetime of possibilities…
@@ -93,15 +152,7 @@ const ValentineQuestion = () => {
             Yes! 💖
           </button>
 
-          <button
-            onMouseEnter={moveNoButton}
-            onTouchStart={moveNoButton}
-            onClick={moveNoButton}
-            className="rounded-full bg-secondary px-10 py-4 font-heading text-xl text-secondary-foreground transition-all duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            style={noPos ? { position: "fixed", ...noPos, zIndex: 100 } : undefined}
-          >
-            No 😢
-          </button>
+          {noPos ? createPortal(noButton, document.body) : noButton}
         </div>
       </div>
     </div>
