@@ -80,7 +80,7 @@ const Index = () => {
         {/* Memories Section */}
         <section className="py-20 px-4 max-w-5xl mx-auto">
           <h2 className="font-display text-4xl md:text-6xl text-primary text-center mb-16">
-            Our Memories 💫
+            My Love 💫
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
