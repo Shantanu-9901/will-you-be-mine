@@ -45,28 +45,40 @@ const ValentineQuestion = () => {
   }
 
   return (
-    <div ref={containerRef} className="relative">
-      <h2 className="font-display text-4xl md:text-6xl text-gold mb-10 animate-pulse-glow inline-block px-6 py-2 rounded-xl">
-        Will You Marry Me? 💕
-      </h2>
+    <div ref={containerRef} className="relative mx-auto w-full max-w-3xl">
+      <div className="rounded-3xl border border-primary/25 bg-card/70 px-6 py-8 text-center shadow-romantic backdrop-blur-xl sm:px-10 sm:py-10">
+        <p className="mb-6 font-heading text-lg italic text-rose-soft sm:text-xl">
+          One lovely meeting, a lifetime of possibilities…
+        </p>
 
-      <div className="flex gap-8 justify-center mt-8">
-        <button
-          onClick={() => setAccepted(true)}
-          className="gradient-romantic text-primary-foreground font-heading text-xl md:text-2xl px-10 py-4 rounded-full shadow-romantic hover:scale-110 transition-all duration-300 hover:shadow-gold"
-        >
-          Yes! 💖
-        </button>
+        <img
+          src={bgPhoto}
+          alt="A photo of us together"
+          className="mx-auto mb-8 h-56 w-44 rounded-2xl border-2 border-primary/30 object-cover shadow-romantic sm:h-64 sm:w-48"
+        />
 
-        <button
-          onMouseEnter={moveNoButton}
-          onTouchStart={moveNoButton}
-          onClick={moveNoButton}
-          className="bg-secondary text-secondary-foreground font-heading text-xl md:text-2xl px-10 py-4 rounded-full transition-all duration-200 hover:bg-muted"
-          style={noPos ? { position: "fixed", ...noPos, zIndex: 100 } : undefined}
-        >
-          No 😢
-        </button>
+        <h2 className="mb-8 inline-block rounded-xl px-3 py-2 font-display text-4xl text-gold animate-pulse-glow sm:text-5xl md:text-6xl">
+          Will You Marry Me? 💕
+        </h2>
+
+        <div className="mt-2 flex flex-wrap justify-center gap-5 sm:gap-8">
+          <button
+            onClick={() => setAccepted(true)}
+            className="gradient-romantic rounded-full px-10 py-4 font-heading text-xl text-primary-foreground shadow-romantic transition-all duration-300 hover:scale-110 hover:shadow-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            Yes! 💖
+          </button>
+
+          <button
+            onMouseEnter={moveNoButton}
+            onTouchStart={moveNoButton}
+            onClick={moveNoButton}
+            className="rounded-full bg-secondary px-10 py-4 font-heading text-xl text-secondary-foreground transition-all duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            style={noPos ? { position: "fixed", ...noPos, zIndex: 100 } : undefined}
+          >
+            No 😢
+          </button>
+        </div>
       </div>
     </div>
   );
