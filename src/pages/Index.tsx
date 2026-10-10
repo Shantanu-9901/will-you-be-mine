@@ -6,13 +6,37 @@ import photo2 from "@/assets/IMG_1119.jpg";
 import photo3 from "@/assets/IMG_1124.jpg";
 
 const memories = [
-  { type: "image", src: photo1, caption: "A favorite memory 💛", rotate: "-3deg", size: "large" },
-  { type: "image", src: photo2, caption: "A little moment, a lot of love 💕", rotate: "2deg", size: "medium" },
-  { type: "video", src: new URL("../assets/ScreenRecording_10-11-2026 02-35-06_1.mov", import.meta.url).href, poster: photo3, caption: "A moment to replay 🎬", rotate: "-1deg", size: "large" },
-  { type: "image", src: photo3, caption: "Beautiful, always ✨", rotate: "3deg", size: "medium" },
-  { type: "video", src: new URL("../assets/ScreenRecording_10-11-2026 02-35-22_1.mov", import.meta.url).href, poster: photo1, caption: "One of my favorite days 💫", rotate: "-2deg", size: "medium" },
-  { type: "video", src: new URL("../assets/ScreenRecording_10-11-2026 02-35-46_1.mov", import.meta.url).href, poster: photo2, caption: "Us, in motion ❤️", rotate: "1deg", size: "large" },
-  { type: "video", src: new URL("../assets/ScreenRecording_10-11-2026 02-36-11_1.mov", import.meta.url).href, poster: photo3, caption: "A memory worth keeping 🎞️", rotate: "-2deg", size: "medium" },
+  { type: "image", src: photo1, caption: "Golden-hour glow ✨", rotate: "-3deg" },
+  { type: "image", src: photo2, caption: "A little coconut break 🥥", rotate: "2deg" },
+  {
+    type: "video",
+    src: new URL("../assets/ScreenRecording_10-11-2026 02-35-06_1.mov", import.meta.url).href,
+    poster: photo3,
+    caption: "That lovely smile ❤️",
+    rotate: "-1deg",
+  },
+  { type: "image", src: photo3, caption: "Sunshine and you ☀️", rotate: "3deg" },
+  {
+    type: "video",
+    src: new URL("../assets/ScreenRecording_10-11-2026 02-35-22_1.mov", import.meta.url).href,
+    poster: photo1,
+    caption: "A little kiss for the camera 😘",
+    rotate: "-2deg",
+  },
+  {
+    type: "video",
+    src: new URL("../assets/ScreenRecording_10-11-2026 02-35-46_1.mov", import.meta.url).href,
+    poster: photo2,
+    caption: "Pretty in pink 🌸",
+    rotate: "1deg",
+  },
+  {
+    type: "video",
+    src: new URL("../assets/ScreenRecording_10-11-2026 02-36-11_1.mov", import.meta.url).href,
+    poster: photo3,
+    caption: "A playful little moment 💚",
+    rotate: "-2deg",
+  },
 ];
 
 const Index = () => {
@@ -55,7 +79,7 @@ const Index = () => {
           <div className="relative z-20 text-center">
             <div className="mb-8 animate-float-heart">
               <div className="w-52 h-52 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-primary shadow-romantic mx-auto ring-4 ring-primary/20 ring-offset-4 ring-offset-background">
-                <img src={photo1} alt="Us" className="w-full h-full object-cover" />
+                <img src={photo1} alt="Us" className="w-full h-full object-cover object-top" />
               </div>
             </div>
 
@@ -99,7 +123,7 @@ const Index = () => {
                   className="relative bg-card rounded-2xl overflow-hidden shadow-romantic/30 border border-primary/10 hover:shadow-romantic transition-all duration-500 hover:scale-[1.02] cursor-pointer"
                   style={{ transform: `rotate(${mem.rotate})` }}
                 >
-                  <div className={`overflow-hidden ${mem.size === "large" ? "h-64 md:h-80" : "h-48 md:h-64"}`}>
+                  <div className="overflow-hidden">
                     {mem.type === "video" ? (
                       <video
                         src={mem.src}
@@ -110,14 +134,14 @@ const Index = () => {
                         muted
                         playsInline
                         preload="metadata"
-                        className="w-full h-full object-cover"
+                        className="block h-auto w-full"
                       />
                     ) : (
                       <img
                         src={mem.src}
                         alt={mem.caption}
                         loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        className="block h-auto w-full transition-transform duration-700 group-hover:scale-105"
                       />
                     )}
                   </div>
