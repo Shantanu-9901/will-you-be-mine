@@ -6,36 +6,32 @@ import photo2 from "@/assets/IMG_1119.jpg";
 import photo3 from "@/assets/IMG_1124.jpg";
 
 const memories = [
-  { type: "image", src: photo1, caption: "Golden-hour glow ✨", rotate: "-3deg" },
-  { type: "image", src: photo2, caption: "A little coconut break 🥥", rotate: "2deg" },
+  { type: "image", src: photo1, caption: "Golden-hour glow ✨" },
   {
     type: "video",
     src: new URL("../assets/ScreenRecording_10-11-2026 02-35-06_1.mov", import.meta.url).href,
     poster: photo3,
     caption: "That lovely smile ❤️",
-    rotate: "-1deg",
   },
-  { type: "image", src: photo3, caption: "Sunshine and you ☀️", rotate: "3deg" },
+  { type: "image", src: photo2, caption: "A little coconut break 🥥" },
   {
     type: "video",
     src: new URL("../assets/ScreenRecording_10-11-2026 02-35-22_1.mov", import.meta.url).href,
     poster: photo1,
     caption: "A little kiss for the camera 😘",
-    rotate: "-2deg",
   },
+  { type: "image", src: photo3, caption: "Sunshine and you ☀️" },
   {
     type: "video",
     src: new URL("../assets/ScreenRecording_10-11-2026 02-35-46_1.mov", import.meta.url).href,
     poster: photo2,
     caption: "Pretty in pink 🌸",
-    rotate: "1deg",
   },
   {
     type: "video",
     src: new URL("../assets/ScreenRecording_10-11-2026 02-36-11_1.mov", import.meta.url).href,
     poster: photo3,
     caption: "A playful little moment 💚",
-    rotate: "-2deg",
   },
 ];
 
@@ -116,14 +112,13 @@ const Index = () => {
                   visibleCards.has(i)
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-16"
-                } ${i % 2 === 1 ? "md:mt-16" : ""}`}
+                }`}
                 style={{ transitionDelay: `${i * 100}ms` }}
               >
                 <div
-                  className="relative bg-card rounded-2xl overflow-hidden shadow-romantic/30 border border-primary/10 hover:shadow-romantic transition-all duration-500 hover:scale-[1.02] cursor-pointer"
-                  style={{ transform: `rotate(${mem.rotate})` }}
+                  className="overflow-hidden rounded-2xl border border-primary/10 bg-card shadow-romantic/30 transition-shadow duration-500 hover:shadow-romantic"
                 >
-                  <div className="overflow-hidden">
+                  <div className="flex aspect-[4/3] items-center justify-center overflow-hidden bg-muted/50">
                     {mem.type === "video" ? (
                       <video
                         src={mem.src}
@@ -134,19 +129,18 @@ const Index = () => {
                         muted
                         playsInline
                         preload="metadata"
-                        className="block h-auto w-full"
+                        className="h-full w-full object-contain"
                       />
                     ) : (
                       <img
                         src={mem.src}
                         alt={mem.caption}
                         loading="lazy"
-                        className="block h-auto w-full transition-transform duration-700 group-hover:scale-105"
+                        className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-[1.02]"
                       />
                     )}
                   </div>
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
-                  <p className="absolute bottom-4 left-4 right-4 font-heading text-sm md:text-base text-foreground italic">
+                  <p className="px-4 py-3 font-heading text-sm md:text-base text-foreground italic">
                     {mem.caption}
                   </p>
                 </div>
