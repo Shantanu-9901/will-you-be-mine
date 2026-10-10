@@ -103,12 +103,12 @@ const Index = () => {
             My Love 💫
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          <div className="columns-1 gap-8 md:columns-2">
             {memories.map((mem, i) => (
               <div
                 key={i}
                 data-idx={i}
-                className={`group transition-all duration-700 ease-out ${
+                className={`mb-8 inline-block w-full break-inside-avoid align-top transition-all duration-700 ease-out ${
                   visibleCards.has(i)
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-16"
@@ -118,7 +118,7 @@ const Index = () => {
                 <div
                   className="overflow-hidden rounded-2xl border border-primary/10 bg-card shadow-romantic/30 transition-shadow duration-500 hover:shadow-romantic"
                 >
-                  <div className="flex aspect-[4/3] items-center justify-center overflow-hidden bg-muted/50">
+                  <div className="overflow-hidden bg-muted/20">
                     {mem.type === "video" ? (
                       <video
                         src={mem.src}
@@ -129,14 +129,14 @@ const Index = () => {
                         muted
                         playsInline
                         preload="metadata"
-                        className="h-full w-full object-contain"
+                        className="block h-auto w-full"
                       />
                     ) : (
                       <img
                         src={mem.src}
                         alt={mem.caption}
                         loading="lazy"
-                        className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+                        className="block h-auto w-full"
                       />
                     )}
                   </div>
